@@ -15,7 +15,7 @@
 %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-classdef NIdaq < handle % {
+classdef NIdaq < LoggableObj % {
 % NAME
 %       NIdaq.m  
 %
@@ -31,15 +31,14 @@ classdef NIdaq < handle % {
 % CHANGE LOG
 %       2015 08 26: dhl88: created
 
-properties 
+properties (Access = public)
     session     %session object
-    inputs      %input  channels structs
-    outputs     %output channels structs
-    notes = ''  %notes
-    git   = ''  %git hash
+    inputs      %array of input  channels structs
+    outputs     %array of output channels structs
+                % structs defined only in addinput() or addoutput()
 end
 
-methods  % {
+methods (Access = public) % {
 
 
 function this = NIdaq()
@@ -50,7 +49,7 @@ function this = NIdaq()
 % RETURN
 %       Returns a NIdaq object that extends handle.  
 %       Handle is used to pass a refere
-
+    this = this@LoggableObj('NIdaq');
     this.session = daq.createSession('ni');
 end
 
@@ -95,11 +94,11 @@ function handle = addoutput_A(this, ...
                 'data',             []...
                 );
     this.outputs = [this.outputs, output_s];
-    this.outputs = sortbychnum(this.outputs);
+    this.outputs = CSUtils.sortnumname(this.outputs, 'channelnumber');
 end
 
 function setoutputdata(this, channelnumber, data)
-    i = findchnum(this.outputs, channelnumber);
+    i = CSUtils.findnumname(this.outputs, 'channelnumber', channelnumber);
     this.outputs(i).data = data;
 end
 
@@ -112,61 +111,8 @@ function data, time = run(this)
     this.session.queueOutputData(datalist);
     [data, time] = this.session.startForeground;
 
-    csvwrite(datastring(), [date, time]);
-    this.populategit();
-    params = struct('inputs',    this.inputs,    ...
-                    'outputs',   this.outputs,   ...
-                    'notes',     this.notes,     ...
-                    'git',       this.git,       ...
-                    'data',      data,           ...
-                    'time',      time            ...
-                   );
-    save(parameterstring(), 'params');
-end
-
-%%%%%%% Helper Methods
-function arr = sortbychnum(arr)
-    for i = 1:length(arr)
-        lowest = i;
-        for j = i:length(arr)
-            if(arr(i).channelnumber > arr(j).channelnumber)
-                lowest = j
-            end
-        tmp = arr(i)
-        arr(i) = arr(j);
-        arr(j) = tmp;
-    end
-end
-
-function index = findchnum(arr, chnum)
-    index = -1;
-    for i = 1:length(arr)
-        if(arr.channelnumber == chnum)
-            index = i;
-            return
-    end
-end
-
-function timestr = timestring()
-    timestr = char(...
-        datetime('now','TimeZone','local','Format','yyyyMMdd_HH:mm:ss_z'));
-end
-
-function datastr = datastring()
-    datastr = [timestring, '_data.csv'];
-end
-
-function paramstr = parameterstring()
-    paramstr = [timestring, '_params.mat'];
-end
-
-function populategit(this)
-    try
-        this.git = [system('git rev-parse HEAD'), '\n', ...
-                    system('git status -s')];
-    catch ME
-        this.git = 'No git or improperly installed';
-    end
+    this.saveparams(['inputs','outputs']);
+    this.savedata  ([date, time]);
 end
 
 end % } END methods
