@@ -1,68 +1,28 @@
-l = TestLoggableObj('test_LoggableObject', './testout/');
-l.notes = 7;
-l.p.param = 1;
-l.p.lifeistough = 9e10;
-
-
-data = [1,2,3; 4,5,6; 7,8,9];
-
-paramname = l.saveparams(['newprop']);
-savename  = l.savedata  (data       );
-
-l.delete()
-
-clearvars -except paramname savename
-
-errors = 0;
-
-load(paramname)
-errors = 0;
-ctr    = 1;
-
-if(notes ~= 7)
-    errors = bitor(errors, ctr);
-end
-ctr = bitshift(ctr,1);
-if(p.param ~= 1)
-    errors = bitor(errors, ctr);
-end
-ctr = bitshift(ctr,1);
-if(p.lifeistough ~= 9e10)
-    errors = bitor(errors, ctr);
-end
-ctr = bitshift(ctr,1);
-if(newprop ~= 10)
-    errors = bitor(errors, ctr);
-end
-ctr = bitshift(ctr,1);
-
-data1 = csvread(savename);
-if(sum(sum(data1 ~= [1,2,3;4,5,6;7,8,9])))
-    errors = bitor(errors,ctr);
-end
-ctr = bitshift(ctr,1);
-
-errors
-
-
-
-classdef TestLoggableObj < LoggableObject
+classdef LoggableObj_test < LoggableObj
 
 properties (Access = public)
     newprop 
+    newprop2
 end
 
 methods (Access = public)
-    function this = TestLoggableObj()
-        this = this@LoggableObj('Test Object', './');
-        newprop = 10;
+    function this = LoggableObj_test(name, dir)
+        this = this@LoggableObj(name, dir);
+        this.newprop = 10;
+        this.newprop = 11;
     end
 
     function delete(this)
-        this@delete();
-        clear newprop
+        this.delete@LoggableObj();
+        clear this.newprop;
+    end 
+
+    function [paramname, savename] = savetestdata(this, data)
+        paramname = this.saveparams({'newprop','newprop2'});
+        savename  = this.savedata  (data);
     end
 end
-
 end
+
+
 

@@ -55,7 +55,7 @@ end
 
 function delete(this)
 %full clean close, including cleaning par
-    this@delete();
+    this.delete@LoggableObj();
     clear this.inputs;
     clear this.outputs;
     release(this.session);
@@ -80,7 +80,7 @@ function handle = addinput_A(this, ...
 end
 
 function handle = addoutput_A(this, ...
-                    devicename, channelnumber, measurementtype, range,
+                    devicename, channelnumber, measurementtype, range,...
                     label)
     handle = addAnalogOutputChannel(this.session, devicename, ...
                                    channelnumber, measurementtype);
@@ -105,23 +105,23 @@ function setoutputdata(this, channelnumber, data)
     i = CSUtils.findnumname(this.outputs, 'channelnumber', channelnumber);
     this.outputs(i).data = zeros(length(data)+1,1);
     for j = 1:length(data)
-        this.outputs(i).data(j) = data(j)
+        this.outputs(i).data(j) = data(j);
     end
     this.outputs(i).data(length(data)+1) = data(length(data));
 end
 
 %%%%%%% Measurement Methods
-function data, time = run(this)
-    datalist = [];
+function [data, time] = run(this)
+    datalist = zeros(length(this.outputs(1).data),length(this.outputs));
     for i = 1:length(this.outputs)
-        datalist = [datalist this.outputs(i).data];
+        datalist(:,i) = this.outputs(i).data; %set each column 
     end
     this.session.queueOutputData(datalist);
     [data, time] = this.session.startForeground;
 
-    data = data(end,:) = []; %removes last row
+    data(end,:) = []; %removes last row
 
-    this.saveparams(['inputs','outputs']);
+    this.saveparams({'inputs','outputs'});
     this.savedata  ([date, time]);
 end
 
