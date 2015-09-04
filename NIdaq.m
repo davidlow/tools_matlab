@@ -41,7 +41,7 @@ end
 methods (Access = public) % {
 
 
-function this = NIdaq()
+function this = NIdaq(savedir)
 % NAME
 %       NIdaq()
 % SYNOPSIS
@@ -49,12 +49,13 @@ function this = NIdaq()
 % RETURN
 %       Returns a NIdaq object that extends handle.  
 %       Handle is used to pass a refere
-    this = this@LoggableObj('NIdaq');
+    this = this@LoggableObj('NIdaq',savedir);
     this.session = daq.createSession('ni');
 end
 
 function delete(this)
 %full clean close, including cleaning par
+    this@delete();
     clear this.inputs;
     clear this.outputs;
     release(this.session);
@@ -98,8 +99,15 @@ function handle = addoutput_A(this, ...
 end
 
 function setoutputdata(this, channelnumber, data)
+%data has 1 more entry at the end than necessary to cope with weirdness
+%with data taking 
+%TODO (need to check this to make sure it works!!!!)
     i = CSUtils.findnumname(this.outputs, 'channelnumber', channelnumber);
-    this.outputs(i).data = data;
+    this.outputs(i).data = zeros(length(data)+1,1);
+    for j = 1:length(data)
+        this.outputs(i).data(j) = data(j)
+    end
+    this.outputs(i).data(length(data)+1) = data(length(data));
 end
 
 %%%%%%% Measurement Methods
@@ -110,6 +118,8 @@ function data, time = run(this)
     end
     this.session.queueOutputData(datalist);
     [data, time] = this.session.startForeground;
+
+    data = data(end,:) = []; %removes last row
 
     this.saveparams(['inputs','outputs']);
     this.savedata  ([date, time]);

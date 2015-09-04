@@ -1,4 +1,4 @@
-classdef LoggableObj < handle & matlab.minin.CustomDisplay % {
+classdef LoggableObj < handle % {
 
 properties (Access = public)
     notes   % NOTES to save
@@ -8,40 +8,47 @@ end
 properties (Access = protected)
     git
     namestring
+    savedir
 end
 
 methods (Access = public)% {
 
-    function this = LoggableObj(name)
-        git   = '';
-        notes = '';
-        namestring = name;
+    function this = LoggableObj(name, savedirectory)
+        this.git   = '';
+        this.notes = '';
+        this.namestring = name;
+        this.savedir = savedirectory;
     end
 
     function delete(this)
         clear git;
         clear notes;
+        clear p;
+        clear namestring;
+        clear savedir;
     end
 
-end % }end public methods
+end 
 
 methods (Access = protected)
 
-    function saveparams(this, keys)
+    function filename = saveparams(this, keys)
         this.populategit();
         parameters = struct(namestring, struct());
         keys = [keys, 'git', 'namestring', 'notes', 'p'];
         for i = 1:length(keys)
             parameters.(nameestring).(keys{i}) = this.(keys{i});
         end
-        save(this.parameterstring(), '-struct', 'parameters');
+        filename = [this.savedir, this.paramstring()];
+        save(filename, '-struct', 'parameters');
     end
 
-    function savedata  (this, datamatrix);
-        csvwrite(this.datastring(), datamatrix);
+    function filename = savedata(this, datamatrix);
+        filename = [this.savedir, this.datastring()];
+        csvwrite(filename, datamatrix);
     end
 
-end % }end protected methods
+end 
 
 methods (Access = private)
     function datastr = datastring(this)
@@ -50,7 +57,7 @@ methods (Access = private)
                    'data.csv'];
     end
 
-    function paramstr = parameterstring()
+    function paramstr = paramstring()
         paramstr = [this.timestring, '_',
                     this.namestring, '_',
                     '_params.mat'];

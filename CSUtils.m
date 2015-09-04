@@ -1,4 +1,7 @@
 classdef CSUtils
+% A bunch of static functions that you can use.  add any Computer Science
+% UTILitieS to this that you think do not belong with any specific class.
+% try and make them as abstract as you can
 methods (Static)
     function index = findnumname(array, name, number)
     % int index findnumname (struct array, String name, int number): 
@@ -25,6 +28,5 @@ methods (Static)
             arr(j) = tmp;
         end
     end
-
 end
 end
