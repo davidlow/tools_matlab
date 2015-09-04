@@ -62,6 +62,10 @@ function delete(this)
 end
 
 %%%%%%% Setup Methods
+function setrate(this, rate)
+    this.session.Rate = rate;
+end
+
 function handle = addinput_A(this, ...
                     devicename, channelnumber, measurementtype, range,...
                     label)
@@ -80,7 +84,7 @@ function handle = addinput_A(this, ...
 end
 
 function handle = addoutput_A(this, ...
-                    devicename, channelnumber, measurementtype, range,
+                    devicename, channelnumber, measurementtype, range,...
                     label)
     handle = addAnalogOutputChannel(this.session, devicename, ...
                                    channelnumber, measurementtype);
@@ -111,15 +115,15 @@ function setoutputdata(this, channelnumber, data)
 end
 
 %%%%%%% Measurement Methods
-function data, time = run(this)
-    datalist = [];
+function [data, time] = run(this)
+    datalist = zeros(length(this.outputs(i).data), length(this.outputs));
     for i = 1:length(this.outputs)
-        datalist = [datalist this.outputs(i).data];
+        datalist(:,i) = this.outputs(i).data;
     end
     this.session.queueOutputData(datalist);
     [data, time] = this.session.startForeground;
 
-    data = data(end,:) = []; %removes last row
+    data(end,:) = []; %removes last row
 
     this.saveparams(['inputs','outputs']);
     this.savedata  ([date, time]);
