@@ -5,14 +5,14 @@ classdef GitUtils
     % 15 09 17: UNTESTED DO NOT USE YET (DL)
     
     methods(Static)
-        function g = git(dir, author, message) 
+        function g = git(dir, author, headmesg, bodymesg) 
         % git(): run this to get status, add, commit, and record version
         % parameters: dir, message = strings
         % returns:    struct with parameters including version hash
             status_old       = GitUtils.gitstatus(dir);
             add_cli_reply    = GitUtils.gitadd(dir);
-            commitmessage    = [author, ': ', message];
-            commit_cli_reply = GitUtils.gitcommit(dir, commitmessage);
+            commitmessage    = [author, ': ', headmesg];
+            commit_cli_reply = GitUtils.gitcommit(dir, commitmessage, bodymesg);
             status_new       = GitUtils.gitstatus(dir);
             version_hash     = GitUtils.gitrevhash(dir);
             g = struct('dir',                dir, ...
@@ -37,10 +37,11 @@ classdef GitUtils
             cd(old);
         end
         
-        function str = gitcommit(dir, message)
+        function str = gitcommit(dir, message, bodymesg)
             old = cd(dir);
             [~, ~  ] = system(['cd ' dir]);
-            [~, str] = system(['git commit -m "', message, '"']);
+            [~, str] = system(['git commit -m "', message, '" -m ', ...
+                                '"', bodymesg, '"']);
             cd(old);
         end
         

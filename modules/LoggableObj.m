@@ -14,7 +14,7 @@ end
 
 properties (Constant)
     FILEPATH   = 'modules/LoggableObj.m'; %for git logging
-    GITMESSAGE = 'Automatic LoggableObj Commit\n';
+    GITHEAD = 'Automatic LoggableObj Commit';
 end
 
 methods (Access = public)% {
@@ -41,25 +41,40 @@ end
 methods (Access = protected)
 
     function filename = saveparams(this, keys)
-        path = which(mfilename)
-        filepath = regexprep(this.FILEPATH, '[/\\]', '\\\\')
-        path = regexprep(path, [filepath, '$'], '')
+    % this.saveparams(keys), saves all keys into paramaters file + git
+        
+        % Sanitizes path name so I know where libraries repo is
+        path = which(mfilename);
+        filepath = regexprep(this.FILEPATH, '[/\\]', '\\\\');
+        path = regexprep(path, [filepath, '$'], '');
+        
         this.git = GitUtils.git(path, ...
-             this.author, ['[',this.namestring,'] ', this.GITMESSAGE]);
+                        this.author, ...
+                        ['[',this.namestring,'] ', this.GITHEAD],...
+                        this.notes);
+                    
+        % making & populating parameters struct to save            
         parameters = struct(this.namestring, struct());
         keys = [keys, {'git', 'namestring', 'savedir', 'notes', 'p',}];
         for i = 1:length(keys)
             parameters.(this.namestring).(keys{i}) = this.(keys{i});
         end
+        
         filename = [this.savedir, this.paramstring()];
         save(filename, '-struct', 'parameters');
     end
 
     function filename = savedata(this, datamatrix, header)
+    % file name = this.savedata(data in matrix, header label string)
+    
         filename = [this.savedir, this.datastring()];
+        
+        % Open file, write header, close
         file = fopen(filename, 'w');
         fprintf(file, header);
         fclose(file);
+        
+        % write matrix as csv (default for dlmwrite) and append
         dlmwrite(filename, datamatrix, '-append');
     end
 
