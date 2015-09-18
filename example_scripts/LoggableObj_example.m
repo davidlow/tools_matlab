@@ -14,6 +14,7 @@ header = '#x, y, z';
 
 [paramname, savename] = l.savetestdata(data, header);
 
+%derp test so I can commit dl
 % l.delete()
 % 
 % clearvars -except paramname savename name
