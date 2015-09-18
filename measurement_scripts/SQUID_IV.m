@@ -1,6 +1,6 @@
 %% Initialize
-%  clear all
-%  close all
+clear all
+close all
 
 %% Add all paths
 mainrepopath = '../';
@@ -27,8 +27,9 @@ nidaq.p.squid_biasr = 5e3;
 nidaq.p.T           = 9.0;
 nidaq.p.Terr        = .060;
 
-nidaq.notes = 'Testing git, settings / data meaningless';
+nidaq.notes = 'Testing git, settings / data meaningless. test of disable git';
 
+OVERRIDE_GITUTILS_GITOFF = 1; %Use this to disable git
 
 %% Setup scan
 nidaq.setrate(nidaq.p.rate);

@@ -14,7 +14,7 @@ end
 
 properties (Constant)
     FILEPATH   = 'modules/LoggableObj.m'; %for git logging
-    GITHEAD = 'Automatic LoggableObj Commit';
+    GITHEAD    = 'Automatic LoggableObj Commit';
 end
 
 methods (Access = public)% {

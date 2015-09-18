@@ -2,13 +2,18 @@ classdef GitUtils
     %GITUTILS Collection of static utilities used with git
     
     % Change log:
-    % 15 09 17: UNTESTED DO NOT USE YET (DL)
+    % 15 09 18: Git works with LoggableObj and NIdaq through SQUID_IV
     
     methods(Static)
         function g = git(dir, author, headmesg, bodymesg) 
         % git(): run this to get status, add, commit, and record version
         % parameters: dir, message = strings
         % returns:    struct with parameters including version hash
+            if (exist('OVERRIDE_GITUTILS_GITOFF', 'var') == 1)
+                g = 'Git forcably disabled by DEF. NOT RECOMMENDED!!!';
+                fprintf(g);
+                return;
+            end
             status_old       = GitUtils.gitstatus(dir);
             add_cli_reply    = GitUtils.gitadd(dir);
             commitmessage    = [author, ': ', headmesg];
