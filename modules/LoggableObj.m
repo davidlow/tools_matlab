@@ -69,10 +69,9 @@ methods (Access = private)
    
 
     function populategit(this)
-        this.git = 'No git or improperly installed';
         try 
-            [~, cmdout1] = system('git rev-parse HEAD');
-            [~, cmdout2] = system('git status -s');
+            [~, githash] = system('git rev-parse HEAD');
+            [~, statusbefore] = system('git status -s');
             this.git = [cmdout1, '\n', cmdout2];
         catch
             
