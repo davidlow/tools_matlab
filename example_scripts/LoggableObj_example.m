@@ -1,7 +1,8 @@
 name = 'LoggableObjectExampleObject';
-addpath('../instrument_drivers');
-addpath('../measurement_scripts');
-addpath('../modules');
+mainrepopath = '../';
+addpath([mainrepopath, 'instrument_drivers']);
+addpath([mainrepopath, 'measurement_scripts']);
+addpath([mainrepopath, 'modules']);
 l = LoggableObj_mock_instrument(name, 'Z:/home/david/codetest/datatrash/'); % create a mock instrument for testing
 l.notes = 7;
 l.p.param = 1;
