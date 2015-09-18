@@ -48,6 +48,10 @@ classdef GitUtils
             [~, str] = system(['git add ', dir]); %. works in subdirs
             cd(old);
         end
+        
+        function str = workingdir()
+            str = 
+        end
     end
     
 end
