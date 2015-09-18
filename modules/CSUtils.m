@@ -30,5 +30,9 @@ methods (Static)
             array(lowest) = tmp;
         end
     end
+    
+    function str = parsefnameplot(str)
+        str = regexprep(str, '_', '\\_');
+    end
 end
 end
