@@ -16,7 +16,7 @@ nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150918/'); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 10;
+nidaq.p.lpf0        = 3;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
 nidaq.p.rate        = 1;
@@ -27,7 +27,7 @@ nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
 
-nidaq.notes = 'slow scan with 1000 points to see if slow stops noise';
+nidaq.notes = 'slow scan with 1000 points and 3 hz lp filter';
 
 %% Setup scan
 nidaq.setrate(nidaq.p.rate);
