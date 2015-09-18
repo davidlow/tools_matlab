@@ -41,7 +41,7 @@ end
 methods (Access = public) % {
 
 
-function this = NIdaq(savedir)
+function this = NIdaq(author, savedir)
 % NAME
 %       NIdaq()
 % SYNOPSIS
@@ -49,7 +49,7 @@ function this = NIdaq(savedir)
 % RETURN
 %       Returns a NIdaq object that extends handle.  
 %       Handle is used to pass a refere
-    this = this@LoggableObj('NIdaq',savedir);
+    this = this@LoggableObj('NIdaq',author, savedir);
     this.session = daq.createSession('ni');
 end
 

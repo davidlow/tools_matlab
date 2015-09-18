@@ -9,15 +9,22 @@ properties (Access = protected)
     git
     namestring
     savedir
+    author
+end
+
+properties (Constant)
+    FILEPATH   = 'modules/LoggableObj.m'; %for git logging
+    GITMESSAGE = 'Automatic LoggableObj Commit\n';
 end
 
 methods (Access = public)% {
 
-    function this = LoggableObj(name, savedirectory)
-        this.git   = '';
-        this.notes = '';
-        this.namestring = name;
-        this.savedir = savedirectory;
+    function this = LoggableObj(name, author, savedirectory)
+        this.git            = '';
+        this.notes          = '';
+        this.namestring     = name;
+        this.savedir        = savedirectory;
+        this.author         = author;
     end
 
     function delete(this)
@@ -26,6 +33,7 @@ methods (Access = public)% {
         clear this.p;
         clear this.namestring;
         clear this.savedir;
+        clear this.author;
     end
 
 end 
@@ -33,7 +41,11 @@ end
 methods (Access = protected)
 
     function filename = saveparams(this, keys)
-        this.populategit();
+        path = which(mfilename)
+        filepath = regexprep(this.FILEPATH, '[/\\]', '\\\\')
+        path = regexprep(path, [filepath, '$'], '')
+        this.git = GitUtils.git(path, ...
+             this.author, ['[',this.namestring,'] ', this.GITMESSAGE]);
         parameters = struct(this.namestring, struct());
         keys = [keys, {'git', 'namestring', 'savedir', 'notes', 'p',}];
         for i = 1:length(keys)
@@ -64,16 +76,6 @@ methods (Access = private)
         paramstr = [this.timestring, '_', ...
                     this.namestring, '_', ...
                     'params.mat'];
-    end
-
-   
-
-    function populategit(this, dir, author, message)
-        %FIX ME
-        % what this should do is get the current working directory
-        % of this script and use that for the dir.  message 
-        % might be default as well.  like 'default commit for measurement
-        this.git = GitUtils.git(dir, author, message);
     end
 
 end % }end private methods

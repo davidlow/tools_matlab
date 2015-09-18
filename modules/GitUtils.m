@@ -11,12 +11,14 @@ classdef GitUtils
         % returns:    struct with parameters including version hash
             status_old       = GitUtils.gitstatus(dir);
             add_cli_reply    = GitUtils.gitadd(dir);
-            commit_cli_reply = GitUtils.gitcommit(dir, [author, ': ', message]);
+            commitmessage    = [author, ': ', message];
+            commit_cli_reply = GitUtils.gitcommit(dir, commitmessage);
             status_new       = GitUtils.gitstatus(dir);
             version_hash     = GitUtils.gitrevhash(dir);
             g = struct('dir',                dir, ...
                        'status_old',         status_old,...
                        'add_cli_reply',      add_cli_reply,...
+                       'commitmessage',      commitmessage,...
                        'commit_cli_reply',   commit_cli_reply,...
                        'status_new',         status_new,...
                        'version_hash',       version_hash...
@@ -48,11 +50,6 @@ classdef GitUtils
             [~, str] = system(['git add ', dir]); %. works in subdirs
             cd(old);
         end
-        
-        function str = workingdir()
-            str = 
-        end
     end
-    
 end
 
