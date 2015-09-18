@@ -9,13 +9,16 @@ classdef GitUtils
         % git(): run this to get status, add, commit, and record version
         % parameters: dir, message = strings
         % returns:    struct with parameters including version hash
-            who
-            exist('OVERRIDE_GITUTILS_GITOFF', 'var')
-            if (exist('OVERRIDE_GITUTILS_GITOFF', 'var') == 1)
-                g = 'Git forcably disabled by DEF. NOT RECOMMENDED!!!';
-                fprintf(g);
+            
+            % for unusual case you want to disable git, here's a way of
+            % doing it from the global scope
+            global OVERRIDE_GITUTILS_GITOFF
+            if (OVERRIDE_GITUTILS_GITOFF == 1)
+                g = 'Git forcably disabled by global. NOT RECOMMENDED!!!';
+                fprintf([g, '\n']);
                 return;
             end
+            
             status_old       = GitUtils.gitstatus(dir);
             add_cli_reply    = GitUtils.gitadd(dir);
             commitmessage    = [author, ': ', headmesg];
