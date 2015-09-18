@@ -29,6 +29,7 @@ nidaq.p.Terr        = .060;
 
 nidaq.notes = 'Testing git, settings / data meaningless. test of disable git';
 
+global OVERRIDE_GITUTILS_GITOFF
 OVERRIDE_GITUTILS_GITOFF = 1; %Use this to disable git
 
 %% Setup scan
