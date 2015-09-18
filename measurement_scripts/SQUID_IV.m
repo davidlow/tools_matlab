@@ -27,7 +27,7 @@ nidaq.p.squid_biasr = 5e3;
 nidaq.p.T           = 9.0;
 nidaq.p.Terr        = .060;
 
-nidaq.notes = 'Testing git, settings / data meaningless. test of disable git';
+nidaq.notes = 'Testing globals';
 
 global OVERRIDE_GITUTILS_GITOFF
 OVERRIDE_GITUTILS_GITOFF = 1; %Use this to disable git
