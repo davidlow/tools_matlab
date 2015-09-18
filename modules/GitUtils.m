@@ -9,6 +9,7 @@ classdef GitUtils
         % git(): run this to get status, add, commit, and record version
         % parameters: dir, message = strings
         % returns:    struct with parameters including version hash
+            exist('OVERRIDE_GITUTILS_GITOFF', 'var')
             if (exist('OVERRIDE_GITUTILS_GITOFF', 'var') == 1)
                 g = 'Git forcably disabled by DEF. NOT RECOMMENDED!!!';
                 fprintf(g);
