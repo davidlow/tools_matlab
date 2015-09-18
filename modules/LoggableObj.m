@@ -3,6 +3,8 @@ classdef LoggableObj < handle % {
 properties (Access = public)
     notes   % NOTES to save
     p       % Parameters to save
+    lastdatasave = '' %last data  save file name
+    lastparamsave= '' %last param save file name
 end
 
 properties (Access = protected)
@@ -61,6 +63,8 @@ methods (Access = protected)
         end
         
         filename = [this.savedir, this.paramstring()];
+        this.lastparamsave = filename;
+        
         save(filename, '-struct', 'parameters');
     end
 
@@ -68,6 +72,7 @@ methods (Access = protected)
     % file name = this.savedata(data in matrix, header label string)
     
         filename = [this.savedir, this.datastring()];
+        this.lastdatasave = filename;
         
         % Open file, write header, close
         file = fopen(filename, 'w');

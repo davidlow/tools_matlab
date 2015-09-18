@@ -20,14 +20,14 @@ nidaq.p.lpf0        = 100;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
 nidaq.p.rate        = 10;
-nidaq.p.range       = 2; % options: 0.1, 0.2, 0.5, 1, 2, 5, 10
+nidaq.p.range       = 2; % options: 0.1, 0.2, 0.5, 1, 5, 10
 nidaq.p.src_amp     = .2;
-nidaq.p.src_numpts  = 1000;
+nidaq.p.src_numpts  = 100;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
 
-nidaq.notes = 'Slower and more points with better range, hopefully less sharp';
+nidaq.notes = 'quicker scan to test code / plotting with file name as title';
 
 %% Setup scan
 nidaq.setrate(nidaq.p.rate);
@@ -49,12 +49,14 @@ nidaq.setoutputdata(1,desout{2});
 %% Plot
 plot(desout{1}/nidaq.p.squid_biasr*1e6, data(:,1));
 hold on
-title(['gain=',           num2str(nidaq.p.gain),                 ...
+title({['param = ', nidaq.lastparamsave], ...
+       ['data  = ', nidaq.lastdatasave] ,  ...
+       ['gain=',           num2str(nidaq.p.gain),                 ...
        ', lp f_0 =',      num2str(nidaq.p.lpf0),                 ...
        ', hz, rate =',    num2str(nidaq.p.rate),                 ...
        ', hz r_{bias} = ' num2str(nidaq.p.squid_biasr),            ...
        ', T = '           num2str(nidaq.p.T)                     ...
-       ]);
+       ]});
 xlabel('I_{bias} = V_{bias}/R_{bias} (\mu A)','fontsize',20);
 ylabel('V_{mod} (V)','fontsize',20);
 
