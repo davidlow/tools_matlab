@@ -27,10 +27,7 @@ nidaq.p.squid_biasr = 5e3;
 nidaq.p.T           = 9.0;
 nidaq.p.Terr        = .060;
 
-nidaq.notes = 'Testing globals';
-
-global OVERRIDE_GITUTILS_GITOFF
-OVERRIDE_GITUTILS_GITOFF = 1; %Use this to disable git
+nidaq.notes = 'Testing globals for override of git';
 
 %% Setup scan
 nidaq.setrate(nidaq.p.rate);
