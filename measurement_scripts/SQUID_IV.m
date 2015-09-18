@@ -27,7 +27,7 @@ nidaq.p.squid_biasr = 5e3;
 nidaq.p.T           = 9.0;
 nidaq.p.Terr        = .060;
 
-nidaq.notes = 'Testing code, measuring just the cable, settings are meaningless';
+nidaq.notes = 'Testing git, settings / data meaningless';
 
 
 %% Setup scan
