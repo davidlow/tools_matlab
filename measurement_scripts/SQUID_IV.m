@@ -19,15 +19,15 @@ nidaq.p.gain        = 500;
 nidaq.p.lpf0        = 100;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
-nidaq.p.rate        = 100;
+nidaq.p.rate        = 10;
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 2, 5, 10
-nidaq.p.src_amp     = .3;
+nidaq.p.src_amp     = .2;
 nidaq.p.src_numpts  = 100;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
 
-nidaq.notes = 'First test of claudette (0003)! SQUID test only, no mod';
+nidaq.notes = 'Last one went to fast, going slower now';
 
 %% Setup scan
 nidaq.setrate(nidaq.p.rate);
