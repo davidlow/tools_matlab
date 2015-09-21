@@ -24,7 +24,7 @@ nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 nidaq.p.src_amp_I   = 25e-6; % current in amps
 nidaq.p.src_numpts  = 100;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
-nidaq.p.T           = 4.28;
+nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 nidaq.p.scantime    = 0;
 
