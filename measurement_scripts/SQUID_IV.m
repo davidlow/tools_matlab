@@ -16,27 +16,28 @@ nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150918/'); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 3;
+nidaq.p.lpf0        = .3;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
-nidaq.p.rate        = .05;
-nidaq.p.duration    = 50;
+nidaq.p.rate        = .1; %0.1 < rate < 2 857 142.9
 nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
 nidaq.p.src_amp     = .125;
-nidaq.p.src_numpts  = 5;
+nidaq.p.src_numpts  = 1000;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
+nidaq.p.scantime    = 0;
 
-nidaq.notes = 'test of slow scan, trying to avoid errors';
+nidaq.notes = 'slow scan with very agressive LP filter. Duration fails, read only';
 
 %% Setup scan
-nidaq.setduration(nidaq.p.duration);
-nidaq.setrate    (nidaq.p.rate);
+
 nidaq.addinput_A ('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID V (sense)');
 nidaq.addinput_A ('Dev1', 4, 'Voltage', nidaq.p.range, 'unused');
 nidaq.addoutput_A('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID I (source)');
 nidaq.addoutput_A('Dev1', 1, 'Voltage', nidaq.p.range, 'unused');
+
+nidaq.setrate    (nidaq.p.rate);
 
 %% Setup data
 desout = {nidaq.p.src_amp * sin(linspace(0,2*pi,nidaq.p.src_numpts)),...
@@ -46,7 +47,9 @@ nidaq.setoutputdata(0,desout{1});
 nidaq.setoutputdata(1,desout{2});
 
 %% Run / collect data
+tic;
 [data, time] = nidaq.run();
+nidaq.p.scantime = toc;
 
 %% Plot
 plot(desout{1}/nidaq.p.squid_biasr*1e6, data(:,1));

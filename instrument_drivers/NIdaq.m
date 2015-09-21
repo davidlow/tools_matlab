@@ -66,10 +66,6 @@ function setrate(this, rate)
     this.session.Rate = rate;
 end
 
-function setduration(this, dur)
-    this.session.DurationInSeconds = dur;
-end
-
 function handle = addinput_A(this, ...
                     devicename, channelnumber, measurementtype, range,...
                     label)
