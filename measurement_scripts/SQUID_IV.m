@@ -20,8 +20,8 @@ nidaq.p.lpf0        = 30;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
 nidaq.p.rate        = 10; %0.1 < rate < 2 857 142.9
-nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
-nidaq.p.src_amp     = .2;
+nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
+nidaq.p.src_amp_I   = 20e-6; % current in amps
 nidaq.p.src_numpts  = 1000;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
@@ -40,7 +40,7 @@ nidaq.addoutput_A('Dev1', 1, 'Voltage', nidaq.p.range, 'unused');
 nidaq.setrate    (nidaq.p.rate);
 
 %% Setup data
-desout = {nidaq.p.src_amp * sin(linspace(0,2*pi,nidaq.p.src_numpts)),...
+desout = {nidaq.p.src_amp_I * nidaq.p.squid_biasr * sin(linspace(0,2*pi,nidaq.p.src_numpts)),...
           nidaq.p.mod_curr * nidaq.p.mod_biasr *    linspace(1,1   ,nidaq.p.src_numpts)  ...
          };
 nidaq.setoutputdata(0,desout{1});
