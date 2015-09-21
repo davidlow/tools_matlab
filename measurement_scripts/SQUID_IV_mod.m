@@ -21,14 +21,14 @@ nidaq.p.mod_curr    = linspace(0,77e-6,7);
 nidaq.p.mod_biasr   = 2.5e3 + 10e3; %1.0 + 1.5 cold, 10k warm
 nidaq.p.rate        = 10; %0.1 < rate < 2 857 142.9
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
-nidaq.p.src_amp_I   = 150e-6; % current in amps
+nidaq.p.src_amp_I   = 25e-6; % current in amps
 nidaq.p.src_numpts  = 100;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
 nidaq.p.scantime    = 0;
 
-nidaq.notes = 'testing code for new mod coil script to iterate through mod coil measurements';
+nidaq.notes = 'code looks good.  Running test run of the long one!';
 
 %% Setup scan
 
