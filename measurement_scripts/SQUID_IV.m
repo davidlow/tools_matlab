@@ -20,6 +20,7 @@ nidaq.p.lpf0        = 3;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
 nidaq.p.rate        = .05;
+nidaq.p.duration    = 50;
 nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
 nidaq.p.src_amp     = .125;
 nidaq.p.src_numpts  = 10;
@@ -27,10 +28,11 @@ nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.28;
 nidaq.p.Terr        = .013;
 
-nidaq.notes = 'test of slow scan';
+nidaq.notes = 'test of slow scan, trying to avoid errors';
 
 %% Setup scan
-nidaq.setrate(nidaq.p.rate);
+nidaq.setduration(nidaq.p.duration);
+nidaq.setrate    (nidaq.p.rate);
 nidaq.addinput_A ('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID V (sense)');
 nidaq.addinput_A ('Dev1', 4, 'Voltage', nidaq.p.range, 'unused');
 nidaq.addoutput_A('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID I (source)');
