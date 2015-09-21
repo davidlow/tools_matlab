@@ -79,7 +79,7 @@ title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
 xlabel('I_{bias} = V_{bias}/R_{bias} (\mu A)','fontsize',20);
 ylabel('V_{mod} (V)','fontsize',20);
 
-legendstr =  cell{length(nidaq.p.mod_curr)};
+legendstr =  cell(length(nidaq.p.mod_curr));
 for i = 1:length(nidaq.p.mod_curr)
     legendstr{i} = [num2str(nidaq.p.mod_curr(i)*1e6), 'uA'];
 end
