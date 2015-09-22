@@ -37,7 +37,7 @@ nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.src_numpts  = nidaq.p.mod_curr * 2 / nidaq.p.mod_step;
 nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nidaq.notes = 'testing code: scanning at correct squid current now';
+nidaq.notes = 'Scanning again to show 1hz speed';
 
 %% Setup scan
 
