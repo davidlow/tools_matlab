@@ -22,13 +22,13 @@ nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150918/'); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 300;
-nidaq.p.rate        = 100; %0.1 < rate < 2 857 142.9
+nidaq.p.lpf0        = 3;
+nidaq.p.rate        = 1; %0.1 < rate < 2 857 142.9
 nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 
 nidaq.p.mod_curr    = 2*(77e-6); %max and min
-nidaq.p.mod_step    = 0.1e-6;
+nidaq.p.mod_step    = 0.5e-6;
 nidaq.p.mod_biasr   = 2.5e3 + 10e3; %1.0 + 1.5 cold, 10k warm
 
 nidaq.p.src_amp_I   = 30e-6; % current in amps
@@ -37,7 +37,7 @@ nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.src_numpts  = nidaq.p.mod_curr * 2 / nidaq.p.mod_step;
 nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nidaq.notes = 'Testing code: SQUID_IV_mod_slice for scanning a current slice';
+nidaq.notes = 'testing code: prev did not see anything but noise, scanning slower';
 
 %% Setup scan
 
