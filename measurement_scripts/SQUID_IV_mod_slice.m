@@ -31,7 +31,7 @@ nidaq.p.mod_curr    = 2*(77e-6); %max and min
 nidaq.p.mod_step    = 0.5e-6;
 nidaq.p.mod_biasr   = 2.5e3 + 10e3; %1.0 + 1.5 cold, 10k warm
 
-nidaq.p.src_amp_I   = 15e-6; % current in amps
+nidaq.p.src_amp_I   = 12e-6; % current in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 
 nidaq.p.src_numpts  = nidaq.p.mod_curr * 2 / nidaq.p.mod_step;
@@ -80,11 +80,6 @@ title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
 xlabel('I_{mod} = V_{mod}/R_{mod} (\mu A)','fontsize',20);
 ylabel('V_{squid} (V)','fontsize',20);
 
-legendstr =  cell(1, length(nidaq.p.mod_curr));
-for i = 1:length(nidaq.p.mod_curr)
-    legendstr{i} = [num2str(nidaq.p.mod_curr(i)*1e6), 'uA'];
-end
-legend(legendstr);
 nidaq.delete();
 
 
