@@ -4,19 +4,19 @@ clear all
 
 
 %% Create NI daq and SR830 lock-in object
-nidaq = NIdaq('Z:/data/montana_b69/TuningForkChar/150915');
+nidaq = NIdaq('Z:/data/montana_b69/TuningForkChar/150924');
 lockin = SR830();
 
 %% Set parameters to be used / saved by LoggableObj
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
-nidaq.p.gain       = 500;
-nidaq.p.lpf0       = 100;
-nidaq.p.mod_curr   = 70e-6;
-nidaq.p.mod_biasr   = 12e3;
+% nidaq.p.gain       = 500;
+% nidaq.p.lpf0       = 100;
+% nidaq.p.mod_curr   = 70e-6;
+% nidaq.p.mod_biasr   = 12e3;
 nidaq.p.rate       = 100; % Hz; number of data points (input or output) passed (inward or outward) per second
 nidaq.p.range      = 10; % options: 0.1, 0.2, 0.5, 1, 2, 5, 10
-nidaq.p.src_amp    = .001; % in Volts???
+%nidaq.p.src_amp    = .001; % in Volts???
 nidaq.p.src_numpts = 10; % number of data points
 nidaq.p.squid_biasr  = 5e3;
 nidaq.p.T          = 9.0;
