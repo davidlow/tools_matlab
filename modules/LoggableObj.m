@@ -1,4 +1,6 @@
 classdef LoggableObj < handle % {
+    
+    
 % 15 09 17: Fix the populategit method -DL
 properties (Access = public)
     notes   % NOTES to save
