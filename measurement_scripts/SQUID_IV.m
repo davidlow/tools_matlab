@@ -16,10 +16,10 @@ nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150928/'); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 10;
+nidaq.p.lpf0        = 3;
 nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
-nidaq.p.rate        = 5; %0.1 < rate < 2 857 142.9
+nidaq.p.rate        = 1; %0.1 < rate < 2 857 142.9
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 nidaq.p.src_amp_I   = 20e-6; % current in amps
 nidaq.p.src_numpts  = 1000;
