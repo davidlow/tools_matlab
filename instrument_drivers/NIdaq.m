@@ -116,7 +116,11 @@ function setoutputdata(this, channelnumber, data)
 end
 
 %%%%%%% Measurement Methods
-function [data, time] = run(this)
+function [data, time] = run(this, willsave)
+    if nargin < 2
+        willsave = 1;
+    end
+    
     datalist = zeros(length(this.outputs(1).data),length(this.outputs));
     for i = 1:length(this.outputs)
         datalist(:,i) = this.outputs(i).data; %set each column 
@@ -129,8 +133,10 @@ function [data, time] = run(this)
     
     tmp = [data, time]; % I don't know why, but this gave no error...
     
-    this.saveparams({'inputs','outputs'});
-    this.savedata  (tmp, this.savedataheader);
+    if willsave
+        this.saveparams({'inputs','outputs'});
+        this.savedata  (tmp, this.savedataheader);
+    end
 end
 
 end % } END methods

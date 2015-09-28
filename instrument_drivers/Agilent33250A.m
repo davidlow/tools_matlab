@@ -116,8 +116,11 @@ end
 
 function freqOut = getFreq(this) % reads frequency in Hz
    this.checkerror();
-   fprintf(this.visa, 'FREQ?\n');
+   %fprintf('getfreq after check error\n');
+   fprintf(this.visa, 'FREQ?'); % DO NOT ADD \n after "FREQ?"!!! Doesn't like it!
+   %fprintf('getfreq after this.visa\n');
    freqOut = fscanf(this.visa, '%f');
+   %fprintf('somet\n');
 end
 
 function setFreq(this, freqVal) % sets frequency in Hz
@@ -135,18 +138,17 @@ end
 
 end % } END methods
 
-methods(Access = private)
+methods(Access = public)
     function checkerror(this)
-        fprintf('checkerror\n');
         while(1)
-            fprintf('while\n');
+            %fprintf('inside while checkerror\n')
             fprintf(this.visa,'SYST:ERR?');
             err = fscanf(this.visa, '%f,%255c');
             errnum = err(1);
             if (errnum == 0)
                 break;
             else
-                fprintf([num2str(err(1)), char(err(2:end))']);
+                fprintf([num2str(err(1)), ' ', char(err(2:end))', ' \n']);
             end
         end
     end
