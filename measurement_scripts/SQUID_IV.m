@@ -21,14 +21,14 @@ nidaq.p.mod_curr    = 0;
 nidaq.p.mod_biasr   = 2.5e3;
 nidaq.p.rate        = 100; %0.1 < rate < 2 857 142.9
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
-nidaq.p.src_amp_I   = 100e-6; % current in amps
+nidaq.p.src_amp_I   = 20e-6; % current in amps
 nidaq.p.src_numpts  = 1000;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.3;
 nidaq.p.Terr        = .013;
 nidaq.p.scantime    = 0;
 
-nidaq.notes = 'first test of dewar, fixing so plots with proper gain';
+nidaq.notes = 'scanning close to I_c to see if still hysteretic';
 
 %% Setup scan
 
