@@ -17,32 +17,32 @@ addpath([mainrepopath, 'modules']);
 
 
 %% Create NI daq object
-nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150918/'); %save path
+nidaq = NIdaq('DL', 'Z:/data/montana_b69/Squid_Tests/150928/'); %save path
 
 %% Set parameters to be used / saved by LoggableObj
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = .3;
+nidaq.p.lpf0        = 1;
 nidaq.p.mod_curr    = linspace(0,77e-6,7);
-nidaq.p.mod_biasr   = 2.5e3 + 10e3; %1.0 + 1.5 cold, 10k warm
-nidaq.p.rate        = .1; %0.1 < rate < 2 857 142.9
+nidaq.p.mod_biasr   = 2.5e3; %1.0 + 1.5 cold, 10k warm
+nidaq.p.rate        = .5; %0.1 < rate < 2 857 142.9
 nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
-nidaq.p.src_amp_I   = 30e-6; % current in amps
+nidaq.p.src_amp_I   = 20e-6; % current in amps
 nidaq.p.src_numpts  = 1000;
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 nidaq.p.scantime    = 0;
 
-nidaq.notes = 'code looks good.  Running test run of the long one!';
+nidaq.notes = 'Scan of dewar for varying mod coil';
 
 %% Setup scan
 
 nidaq.addinput_A ('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID V (sense)');
 nidaq.addinput_A ('Dev1', 4, 'Voltage', nidaq.p.range, 'unused');
 nidaq.addoutput_A('Dev1', 0, 'Voltage', nidaq.p.range, 'SQUID I (source)');
-nidaq.addoutput_A('Dev1', 1, 'Voltage', nidaq.p.range, 'unused');
+nidaq.addoutput_A('Dev1', 1, 'Voltage', nidaq.p.range, 'mod I');
 
 nidaq.setrate    (nidaq.p.rate);
 
