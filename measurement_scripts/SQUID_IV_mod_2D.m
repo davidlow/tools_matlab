@@ -96,7 +96,9 @@ for mod = modVs
     
     data = data(:,1)'; % now a row vector (0, 0, 0, 0,)
     
-    forw_d = data(length(rampi)+1: ...
+    size(data);
+    
+    forw_d = data(length(rampi)+1:...
                   length(rampi) + length(squidVs));
     back_d = data(length(rampi) + length(squidVs) + 1: ...
                   length(rampi) + length(squidVs) + length(squidVs));
