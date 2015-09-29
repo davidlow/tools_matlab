@@ -36,7 +36,7 @@ nidaq.p.mod_I_span  = 200e-6; % total span in amps
 nidaq.p.mod_I_step  = 2e-6;   % current step in amps
 nidaq.p.mod_biasr   = 2.5e3;  %1.0 + 1.5 cold
 
-nidaq.p.squid_I_cntr= 50e-6;  % center current in amps
+nidaq.p.squid_I_cntr= 0e-6;  % center current in amps
 nidaq.p.squid_I_span= 100e-6; % total span in amps
 nidaq.p.squid_I_step= .5e-6;  % current step in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
