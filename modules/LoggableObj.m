@@ -76,13 +76,7 @@ methods (Access = protected)
         filename = [this.savedir, this.datastring()];
         this.lastdatasave = filename;
         
-        % Open file, write header, close
-        file = fopen(filename, 'w');
-        fprintf(file, header);
-        fclose(file);
-        
-        % write matrix as csv (default for dlmwrite) and append
-        dlmwrite(filename, datamatrix, '-append');
+        CSUtils.savecsv(filename, datamatrix, header);
     end
 
 end 

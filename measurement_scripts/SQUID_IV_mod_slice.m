@@ -65,7 +65,7 @@ nidaq.setoutputdata(1,desout{2});
 
 %% Plot
 hold on
-plot(desout{2}/nidaq.p.mod_biasr*1e6, data(:,1));
+plot(desout{2}/nidaq.p.mod_biasr*1e6, data(:,1)/nidaq.p.gain);
 
 title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
        ['data  = ', CSUtils.parsefnameplot(nidaq.lastdatasave)],  ...

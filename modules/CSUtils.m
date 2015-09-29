@@ -34,5 +34,13 @@ methods (Static)
     function str = parsefnameplot(str)
         str = regexprep(str, '_', '\\_');
     end
+    
+    function savecsv(filename, datamatrix, header)
+        file = fopen(filename, 'w');
+        fprintf(file, header);
+        fclose(file);
+        
+        dlmwrite(filename, datamatrix, '-append');
+    end
 end
 end

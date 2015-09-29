@@ -61,7 +61,7 @@ title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
        ', T = '           num2str(nidaq.p.T)                     ...
        ]});
 xlabel('I_{bias} = V_{bias}/R_{bias} (\mu A)','fontsize',20);
-ylabel('V_{mod} (V)','fontsize',20);
+ylabel('V_{squid} (V)','fontsize',20);
 
 nidaq.delete();
 

@@ -73,7 +73,7 @@ hold on
 for i = 1:length(alldata)
     data   = alldata{i};
     desout = alldesout{i};
-    plot(desout{1}/nidaq.p.squid_biasr*1e6, data(:,1));
+    plot(desout{1}/nidaq.p.squid_biasr*1e6, data(:,1)/nidaq.p.gain);
 end
 title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
        ['data  = ', CSUtils.parsefnameplot(nidaq.lastdatasave)],  ...
@@ -84,7 +84,7 @@ title({['param = ', CSUtils.parsefnameplot(nidaq.lastparamsave)], ...
        ', T = '           num2str(nidaq.p.T)                     ...
        ]});
 xlabel('I_{bias} = V_{bias}/R_{bias} (\mu A)','fontsize',20);
-ylabel('V_{mod} (V)','fontsize',20);
+ylabel('V_{squid} (V)','fontsize',20);
 
 legendstr =  cell(1, length(nidaq.p.mod_curr));
 for i = 1:length(nidaq.p.mod_curr)
