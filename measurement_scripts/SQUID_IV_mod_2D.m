@@ -79,8 +79,8 @@ rampi   = (nidaq.p.squid_I_cntr - nidaq.p.mod_I_span/2) *  ...
 squidVs = [rampi, squidVsraw, squidVsraw(end:-1:1), rampi(end:-1:1)];
 
 
-allforw = zeros(length(modVs), length(squidVs));
-allback = zeros(length(modVs), length(squidVs));
+allforw = zeros(length(modVs), length(squidVsraw));
+allback = zeros(length(modVs), length(squidVsraw));
 
 %% Run / collect data
 % for all mod currents, set mod coil voltage and squid voltages.  Append
