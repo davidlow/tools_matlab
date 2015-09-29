@@ -42,7 +42,7 @@ nidaq.p.squid_I_step= .5e-6;  % current step in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.ramppts     = 10;
 
-nidaq.p.range       = 5; % options: 0.1, 0.2, 0.5, 1, 5, 10
+nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
 nidaq.notes = 'new code, testing 2D squid IV code';
 
@@ -114,7 +114,7 @@ CSUtils.savecsv([nidaq.savedir, nidaq.timestring(), '_back.csv'],...
 
 %% Plot
 hold on
-imagesc(squidVs/nidaq.p.squid_biasr, ...
+imagesc(squidVsraw/nidaq.p.squid_biasr, ...
         modVs  /nidaq.p.mod_biasr  , ...
         allforw);
 
