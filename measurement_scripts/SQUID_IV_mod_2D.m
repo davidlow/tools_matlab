@@ -97,6 +97,8 @@ for mod = modVs
     data = data(:,1)'; % now a row vector (0, 0, 0, 0,)
     
     size(data)
+    length(rampi)+1
+    length(rampi) + length(squidVs)
     
     forw_d = data(length(rampi)+1:...
                   length(rampi) + length(squidVs));
