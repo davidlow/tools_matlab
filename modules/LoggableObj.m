@@ -7,12 +7,12 @@ properties (Access = public)
     p       % Parameters to save
     lastdatasave = '' %last data  save file name
     lastparamsave= '' %last param save file name
+    savedir
 end
 
 properties (Access = protected)
     git
     namestring
-    savedir
     author
 end
 
