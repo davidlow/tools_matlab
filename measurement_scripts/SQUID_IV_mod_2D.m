@@ -33,18 +33,18 @@ nidaq.p.Terr        = .013;
 
 nidaq.p.mod_I_cntr  = 0;      % center in amps
 nidaq.p.mod_I_span  = 200e-6; % total span in amps
-nidaq.p.mod_I_step  = 2e-6;   % current step in amps
+nidaq.p.mod_I_step  = .5e-6;   % current step in amps
 nidaq.p.mod_biasr   = 2.5e3;  %1.0 + 1.5 cold
 
 nidaq.p.squid_I_cntr= 0e-6;  % center current in amps
-nidaq.p.squid_I_span= 100e-6; % total span in amps
-nidaq.p.squid_I_step= .5e-6;  % current step in amps
+nidaq.p.squid_I_span= 50e-6; % total span in amps
+nidaq.p.squid_I_step= .2e-6;  % current step in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.ramppts     = 10;
 
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nidaq.notes = 'new code, testing 2D squid IV code';
+nidaq.notes = 'testing 2D squid IV code with slower scan and up to date plotting';
 
 %% Setup scan
 
@@ -103,6 +103,9 @@ for mod = modVs
     allforw(i,:) = forw_d;
     allback(i,:) = back_d;
     i = i + 1;
+    imagesc(squidVsraw/nidaq.p.squid_biasr, ...
+        modVs  /nidaq.p.mod_biasr  , ...
+        allforw);
 end
 
 CSUtils.savecsv([nidaq.savedir, nidaq.timestring(), '_forw.csv'],...
@@ -113,6 +116,7 @@ CSUtils.savecsv([nidaq.savedir, nidaq.timestring(), '_back.csv'],...
                );
 
 %% Plot
+close all
 hold on
 imagesc(squidVsraw/nidaq.p.squid_biasr, ...
         modVs  /nidaq.p.mod_biasr  , ...
