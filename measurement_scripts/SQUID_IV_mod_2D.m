@@ -27,7 +27,7 @@ nidaq = NIdaq('DL', path); %save path
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
 nidaq.p.lpf0        = 300;
-nidaq.p.rate        = 200; %0.1 < rate < 2 857 142.9
+nidaq.p.rate        = 100; %0.1 < rate < 2 857 142.9
 nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 
@@ -87,6 +87,7 @@ allback = zeros(length(modVs), length(squidVsraw));
 % data to correct place in data arrays
 
 i = 1;
+colormap(jet);
 for mod = modVs
     modV = mod * linspace(1,1,length(squidVs));
     nidaq.setoutputdata(0, squidVs);
@@ -118,6 +119,7 @@ CSUtils.savecsv([nidaq.savedir, nidaq.timestring(), '_back.csv'],...
 %% Plot
 close all
 hold on
+colormap(jet);
 imagesc(squidVsraw/nidaq.p.squid_biasr, ...
         modVs  /nidaq.p.mod_biasr  , ...
         allforw);
