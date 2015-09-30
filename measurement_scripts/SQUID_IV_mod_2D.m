@@ -26,25 +26,25 @@ nidaq = NIdaq('DL', path); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 300;
-nidaq.p.rate        = 100; %0.1 < rate < 2 857 142.9
+nidaq.p.lpf0        = 1;
+nidaq.p.rate        = .5; %0.1 < rate < 2 857 142.9
 nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 
 nidaq.p.mod_I_cntr  = 0;      % center in amps
 nidaq.p.mod_I_span  = 200e-6; % total span in amps
-nidaq.p.mod_I_step  = .5e-6;   % current step in amps
+nidaq.p.mod_I_step  = .2e-6;   % current step in amps
 nidaq.p.mod_biasr   = 2.5e3;  %1.0 + 1.5 cold
 
 nidaq.p.squid_I_cntr= 0e-6;  % center current in amps
 nidaq.p.squid_I_span= 50e-6; % total span in amps
-nidaq.p.squid_I_step= .2e-6;  % current step in amps
+nidaq.p.squid_I_step= .1e-6;  % current step in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.ramppts     = 10;
 
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nidaq.notes = 'testing 2D squid IV code with slower scan and up to date plotting';
+nidaq.notes = 'Very slow scan to make sure I can characteristic curve without noise';
 
 %% Setup scan
 
