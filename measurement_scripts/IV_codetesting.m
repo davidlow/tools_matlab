@@ -50,7 +50,7 @@ subplot(2,2,2);
 plot(input, 'bs');
 title('source');
 subplot(2,2,3);
-plot(input,data, 'bt');
+plot(input,data, 'bo');
 xlabel('source');
 ylabel('sense');
 
