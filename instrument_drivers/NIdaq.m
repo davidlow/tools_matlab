@@ -139,6 +139,11 @@ function [data, time] = run(this, willsave)
     end
 end
 
+function save(this)
+    % saves parameters
+    this.saveparams({'inputs','outputs'});
+end
+
 end % } END methods
 
 methods(Access = private)

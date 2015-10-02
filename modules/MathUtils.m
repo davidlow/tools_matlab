@@ -14,5 +14,40 @@ methods (Static)
             end
         end
     end
+    
+    function array = smoothrmp_lo2hi(rawarray, ramppts)
+    %smoothly ramps from 0 -> rawarray -> rawarray backwards -> 0
+    %the transitions from 0 <-> rawarray(1) is sin(0), sin(pi/2)
+        ramp = rawarray(1) * sin(linspace(0,pi/2,ramppts));
+        array = [ramp, rawarray, rawarray(end:-1:1), ramp(end:-1:1)];
+    end
+    
+    function array = striprmp_1(rawarray, ramplen, rawlength)
+    % strips the ramp out of data, returns the 1st data set
+        array = rawarray(ramplen + 1 : ramplen + rawlength);
+    end
+    
+    function array = striprmp_2(rawarray, ramplen, rawlength)
+    % strips the ramp out of the data, returns the 2nd data set
+    % 1st and 2nd determined by order
+        array = rawarray(ramplen + rawlength + 1 : ...
+                         ramplen + rawlength + rawlength);
+    end
+    
+    function index = hist_detect(array, trigger, range)
+    % histogram detection, returns index of 1st instance of 
+    % array that falls within range of trigger.
+        index = 1;
+        upperbound = trigger + trigger*range/2;
+        lowerbound = trigger - trigger*range/2;
+        for a = array
+            if(a < upperbound && a > lowerbound)
+                break;
+            end
+            index = index + 1;
+        end
+    end
+    
+    
 end % END METHODS
 end % END CLASS
