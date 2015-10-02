@@ -75,7 +75,9 @@ squidVsraw = nq.p.squid.biasr *                                   ...
                       nq.p.squid.I_cntr + nq.p.squid.I_span/2, ...
                       nq.p.squid.I_span / nq.p.squid.I_step ); 
 squidVs = MathUtils.smoothrmp_lo2hi(squidVsraw, nq.p.ramppts);
-               
+
+plot(squidVs)
+
 modVs   = nq.p.mod.biasr * linspace(1, 1, length(squidVs) );    
 
 highsw = zeros(1, nq.p.hist.pts);
