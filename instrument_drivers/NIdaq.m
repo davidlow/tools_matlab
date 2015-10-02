@@ -141,14 +141,14 @@ function [data, time] = run(this, willsave)
     tmp = [sourcedata, data, time]; % I don't know why, but this gave no error...
     
     if willsave
-        this.saveparams({'inputs','outputs'});
+        this.saveparams({'sense','source'});
         this.savedata  (tmp, this.savedataheader);
     end
 end
 
 function save(this)
     % saves parameters
-    this.saveparams({'inputs','outputs'});
+    this.saveparams({'sense','source'});
 end
 
 end % } END methods

@@ -28,7 +28,7 @@ nq.p.rate        = 1000; %0.1 < rate < 2 857 142.9
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nq.notes = 'testing to make sure IV is still linear!';
+nq.notes = 'testing to make sure IV is still linear + code testing!';
 
 %% Setup scan
 
