@@ -122,7 +122,6 @@ nq.p.cal.high_data  = forw_d(end);
 % strip forward data, add switch point to high to highswitch set
 % strip backwards data, add switch to low to lowswitch set
 
-colormap(jet);
 for i = 1:nq.p.hist.pts
     nq.setoutputdata(0, squidVs);
     nq.setoutputdata(1, modVs);
