@@ -48,7 +48,7 @@ plot(data);
 subplot(2,2,2); 
 plot(input);
 subplot(2,2,3);
-plot(input,output);
+plot(input,data);
 
 nq.delete();
 
