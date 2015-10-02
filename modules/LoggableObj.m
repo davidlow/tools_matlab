@@ -7,6 +7,7 @@ properties (Access = public)
     p       % Parameters to save
     lastdatasave = '' %last data  save file name
     lastparamsave= '' %last param save file name
+    scantype     = '' % extra notes to save what kind of scan this was
     savedir
 end
 
@@ -85,12 +86,14 @@ methods (Access = private)
     function datastr = datastring(this)
         datastr = [this.timestring, '_', ... 
                    this.namestring, '_', ...
+                   this.scantype, '_', ...
                    'data.csv'];
     end
 
     function paramstr = paramstring(this)
         paramstr = [this.timestring, '_', ...
                     this.namestring, '_', ...
+                    this.scantype, '_', ...
                     'params.mat'];
     end
 
