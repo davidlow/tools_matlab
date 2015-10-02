@@ -47,10 +47,10 @@ subplot(2,2,1);
 plot(data,'bs');
 title('sense');
 subplot(2,2,2); 
-plot(input);
+plot(input, 'bs');
 title('source');
 subplot(2,2,3);
-plot(input,data);
+plot(input,data, 'bt');
 xlabel('source');
 ylabel('sense');
 
