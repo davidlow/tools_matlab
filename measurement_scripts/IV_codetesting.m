@@ -37,8 +37,8 @@ nq.addoutput_A('Dev1', 0, 'Voltage', nq.p.range, 'SQUID I (source)');
 
 nq.setrate    (nq.p.rate);
 
-%input = [0, 0, 1, 0, 0];
-input = [1, 1, 0, 1, 1];
+input = [0, 0, 1, 0, 0];
+%input = [1, 1, 0, 1, 1];
 nq.setoutputdata(0, input);
 
 [data, ~] = nq.run();
