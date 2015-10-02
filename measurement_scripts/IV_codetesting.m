@@ -45,10 +45,14 @@ nq.setoutputdata(0, input);
 figure;
 subplot(2,2,1);
 plot(data);
+title('sense');
 subplot(2,2,2); 
 plot(input);
+title('source');
 subplot(2,2,3);
 plot(input,data);
+xlabel('source');
+ylabel('sense');
 
 nq.delete();
 
