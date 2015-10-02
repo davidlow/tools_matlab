@@ -42,5 +42,13 @@ methods (Static)
         
         dlmwrite(filename, datamatrix, '-append');
     end
+    
+    function currentcheck(currents, bound)
+        for c = currents
+            if abs(c) > bound
+                error('Current exceeds bounds');
+            end
+        end
+    end
 end
 end

@@ -48,6 +48,6 @@ methods (Static)
         end
     end
     
-    
+
 end % END METHODS
 end % END CLASS

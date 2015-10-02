@@ -76,9 +76,11 @@ squidVsraw = nq.p.squid.biasr *                                   ...
                       nq.p.squid.I_span / nq.p.squid.I_step ); 
 squidVs = MathUtils.smoothrmp_lo2hi(squidVsraw, nq.p.ramppts);
 
-plot(squidVs)
+modVs   = nq.p.mod.I * nq.p.mod.biasr * linspace(1, 1, length(squidVs) );    
 
-modVs   = nq.p.mod.biasr * linspace(1, 1, length(squidVs) );    
+%check if current might destroy squid / mod coil!
+CSUtils.currentcheck(squidVs / nq.p.squid.biasr, 100e-6);
+CSUtils.currentcheck(modVs   / nq.p.mod.biasr,   300e-6);
 
 highsw = zeros(1, nq.p.hist.pts);
 lowsw  = zeros(1, nq.p.hist.pts);
@@ -92,6 +94,11 @@ squidVtmp   = nq.p.squid.biasr * ...
               linspace(nq.p.cal.low, nq.p.cal.high, nq.p.cal.pts);
 squidVtmpsm = MathUtils.smoothrmp_lo2hi(squidVtmp, nq.p.ramppts);
 modVtmp     = linspace(0, 0, length(squidVtmpsm));
+
+%check if current might destroy squid / mod coil!
+CSUtils.currentcheck(squidVtmpsm / nq.p.squid.biasr, 100e-6);
+CSUtils.currentcheck(modVtmp / nq.p.mod.biasr, 300e-6);
+
 
 nq.setoutputdata(0, squidVtmpsm);
 nq.setoutputdata(1, modVtmp);
