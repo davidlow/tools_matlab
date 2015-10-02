@@ -29,7 +29,8 @@ classdef NIdaq < LoggableObj % {
 %       care about are:
 %
 % CHANGE LOG
-%       2015 08 26: dhl88: created
+%       2015 10 02: dl: reproduced and solved the input/output offset bug 
+%       2015 08 26: dl: created
 
 properties (Access = public)
     session     %session object
@@ -109,12 +110,11 @@ function setoutputdata(this, channelnumber, data)
 %TODO (need to check this to make sure it works!!!!)
 %DL 151002: Something is definitely wrong!
     i = CSUtils.findnumname(this.source, 'channelnumber', channelnumber);
-    %this.source(i).data = zeros(length(data)+1,1);
-    this.source(i).data = zeros(length(data),1);
+    this.source(i).data = zeros(length(data)+1,1);
     for j = 1:length(data)
         this.source(i).data(j) = data(j);
     end
-    %this.source(i).data(length(data)+1) = data(length(data));
+    this.source(i).data(length(data)+1) = data(length(data));
 end
 
 %%%%%%% Measurement Methods
@@ -130,15 +130,16 @@ function [data, time] = run(this, willsave)
     this.session.queueOutputData(datalist);
     [data, time] = this.session.startForeground;
     
+    
+    
     sourcedata = zeros(length(data), length(this.source));
     for i = 1:length(this.source)
         sourcedata(:,i) = this.source(i).data;
     end
     
-    %sourcedata(end,:) = [];
-    
-    %data(end,:) = []; %removes last data because it's a dupe
-    %time(end,:) = []; %remove last time as well
+    sourcedata(end,:) = [];
+    data(1,:) = []; %first data point has output from last time daq ran!
+    time(1,:) = []; %measure at the very instant the voltage is changed
     
     tmp = [sourcedata, data, time]; % I don't know why, but this gave no error...
     
