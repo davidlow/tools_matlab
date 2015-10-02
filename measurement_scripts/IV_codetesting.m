@@ -28,18 +28,20 @@ nq.p.rate        = 1000; %0.1 < rate < 2 857 142.9
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nq.notes = 'I do not see any of the weird effects.';
+nq.notes = 'Making sure different number of inputs / outputs works.';
 
 %% Setup scan
 
 nq.addinput_A ('Dev1', 0, 'Voltage', nq.p.range, 'SQUID V (sense)');
 nq.addoutput_A('Dev1', 0, 'Voltage', nq.p.range, 'SQUID I (source)');
+nq.addoutput_A('Dev1', 1, 'Voltage', nq.p.range, 'unused (source)');
 
 nq.setrate    (nq.p.rate);
 
 input = [0, 0, 1, 0, 0];
 %input = [1, 1, 0, 1, 1];
 nq.setoutputdata(0, input);
+nq.setoutputdata(1, input);
 
 [data, ~] = nq.run();
 
