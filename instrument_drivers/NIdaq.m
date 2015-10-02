@@ -112,7 +112,7 @@ function setoutputdata(this, channelnumber, data)
     for j = 1:length(data)
         this.source(i).data(j) = data(j);
     end
-    this.source(i).data(length(data)+1) = data(length(data));
+    %this.source(i).data(length(data)+1) = data(length(data));
 end
 
 %%%%%%% Measurement Methods
@@ -133,10 +133,10 @@ function [data, time] = run(this, willsave)
         sourcedata(:,i) = this.source(i).data;
     end
     
-    sourcedata(end,:) = [];
+    %sourcedata(end,:) = [];
     
-    data(end,:) = []; %removes last data because it's a dupe
-    time(end,:) = []; %remove last time as well
+    %data(end,:) = []; %removes last data because it's a dupe
+    %time(end,:) = []; %remove last time as well
     
     tmp = [sourcedata, data, time]; % I don't know why, but this gave no error...
     
