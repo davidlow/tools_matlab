@@ -44,7 +44,7 @@ nq.setoutputdata(0, input);
 
 figure;
 subplot(2,2,1);
-plot(data);
+plot(data,'bs');
 title('sense');
 subplot(2,2,2); 
 plot(input);
