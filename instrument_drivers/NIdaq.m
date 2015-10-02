@@ -161,7 +161,7 @@ methods(Access = private)
         str = ['# ',LoggableObj.timestring(),', ',this.namestring,'\n# '];
         for i = 1:length(this.source) % this is source
             units = '(A), ';
-            if(strcmp('Voltage', this.sense(i).measurementtype))
+            if(strcmp('Voltage', this.source(i).measurementtype))
                 units = '(V), ';
             end
             str = [str, this.sense(i).label, ' ', units];
