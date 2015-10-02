@@ -107,8 +107,7 @@ function setoutputdata(this, channelnumber, data)
 %with data taking.
 %format of data can be either a row or column vector, as long as 1D
 %TODO (need to check this to make sure it works!!!!)
-%DL 151002: I'm not sure if removing these points do anything at all.
-%           I think you just need to be careful with starting at 0
+%DL 151002: Something is definitely wrong!
     i = CSUtils.findnumname(this.source, 'channelnumber', channelnumber);
     %this.source(i).data = zeros(length(data)+1,1);
     this.source(i).data = zeros(length(data),1);
