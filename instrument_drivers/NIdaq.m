@@ -164,14 +164,14 @@ methods(Access = private)
             if(strcmp('Voltage', this.source(i).measurementtype))
                 units = '(V), ';
             end
-            str = [str, this.sense(i).label, ' ', units];
+            str = [str, this.source(i).label, ' ', units];
         end
         for i = 1:length(this.sense) % this is sense
             units = '(A), ';
             if(strcmp('Voltage', this.sense(i).measurementtype))
                 units = '(V), ';
             end
-            str = [str, this.source(i).label, ' ', units];
+            str = [str, this.sense(i).label, ' ', units];
         end
         str = [str, 'time (s)\n'];
     end
