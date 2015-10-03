@@ -45,7 +45,7 @@ nq.p.cal.low    = 0e-6;   % calibration, when squid is superconducting
 nq.p.cal.high   = 20e-6;  % calibration, after squid jumps to normal
 nq.p.cal.pts    = 10;     % calibration, number of points in calibration
 
-nq.p.hist.pts   = 500;   % number of points in the histogram
+nq.p.hist.pts   = 1000;   % number of points in the histogram
 nq.p.hist.range = .20;    % deviation from the target point for 
                              % registering successful swich from lo -> hi
 
@@ -147,6 +147,7 @@ for i = 1:nq.p.hist.pts
                                           histrange));
     highsw(i) = highsw(i) / nq.p.squid.biasr;
     lowsw(i)  = lowsw(i)  / nq.p.squid.biasr;
+    histogram(highsw(1:i))
 end
 
 CSUtils.savecsv([nq.savedir, nq.timestring(), '_highsw.csv'],...
