@@ -42,6 +42,7 @@ methods (Static)
         lowerbound = trigger - trigger*range/2;
         for a = array
             if(a < upperbound && a > lowerbound)
+                index
                 break;
             end
             index = index + 1;
