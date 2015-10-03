@@ -26,8 +26,8 @@ nq = NIdaq('DL', path); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nq.p.gain        = 500;
-nq.p.lpf0        = 300;
-nq.p.rate        = 200; %0.1 < rate < 2 857 142.9
+nq.p.lpf0        = 1000;
+nq.p.rate        = 700; %0.1 < rate < 2 857 142.9
 nq.p.T           = 4.38;
 nq.p.Terr        = .013;
 
