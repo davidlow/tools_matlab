@@ -37,15 +37,19 @@ methods (Static)
     function index = hist_detect(array, trigger, range)
     % histogram detection, returns index of 1st instance of 
     % array that falls within range of trigger.
-        index = 1;
-        upperbound = trigger + trigger*range/2;
-        lowerbound = trigger - trigger*range/2;
+        index = 0;
+        if (trigger > 0)
+            upperbound = trigger + trigger*range/2;
+            lowerbound = trigger - trigger*range/2;
+        else
+            upperbound = trigger - trigger * range/2;
+            lowerbound = trigger + trigger * range/2;
+        end
         for a = array
+            index = index + 1;
             if(a < upperbound && a > lowerbound)
-                index
                 break;
             end
-            index = index + 1;
         end
     end
     
