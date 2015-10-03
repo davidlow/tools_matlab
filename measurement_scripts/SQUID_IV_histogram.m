@@ -27,7 +27,7 @@ nq = NIdaq('DL', path); %save path
 % add them here  All of these 'should' be saved ;)
 nq.p.gain        = 500;
 nq.p.lpf0        = 1000;
-nq.p.rate        = 700; %0.1 < rate < 2 857 142.9
+nq.p.rate        = 850; %0.1 < rate < 2 857 142.9
 nq.p.T           = 4.38;
 nq.p.Terr        = .013;
 
@@ -36,7 +36,7 @@ nq.p.mod.biasr   = 2.5e3;  %1.0 + 1.5 cold
 
 nq.p.squid.I_cntr= 10e-6;  % center current in amps
 nq.p.squid.I_span= 30e-6; % total span in amps
-nq.p.squid.I_step= .2e-6;  % current step in amps
+nq.p.squid.I_step= .05e-6;  % current step in amps
 nq.p.squid.biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 
 nq.p.ramppts     = 10;
@@ -45,7 +45,7 @@ nq.p.cal.low    = 0e-6;   % calibration, when squid is superconducting
 nq.p.cal.high   = 20e-6;  % calibration, after squid jumps to normal
 nq.p.cal.pts    = 10;     % calibration, number of points in calibration
 
-nq.p.hist.pts   = 100;   % number of points in the histogram
+nq.p.hist.pts   = 500;   % number of points in the histogram
 nq.p.hist.range = .20;    % deviation from the target point for 
                              % registering successful swich from lo -> hi
 
