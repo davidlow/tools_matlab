@@ -147,7 +147,8 @@ for i = 1:nq.p.hist.pts
                                           histrange));
     highsw(i) = highsw(i) / nq.p.squid.biasr;
     lowsw(i)  = lowsw(i)  / nq.p.squid.biasr;
-    histogram(highsw(1:i))
+    histogram(highsw(1:i));
+    title([num2str(i), ' / ' num2str(length(highsw))]);
 end
 
 CSUtils.savecsv([nq.savedir, nq.timestring(), '_highsw.csv'],...
