@@ -26,8 +26,8 @@ nidaq = NIdaq('DL', path); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nidaq.p.gain        = 500;
-nidaq.p.lpf0        = 300;
-nidaq.p.rate        = 100; %0.1 < rate < 2 857 142.9
+nidaq.p.lpf0        = 1000;
+nidaq.p.rate        = 700; %0.1 < rate < 2 857 142.9
 nidaq.p.T           = 4.38;
 nidaq.p.Terr        = .013;
 
@@ -44,7 +44,7 @@ nidaq.p.ramppts     = 10;
 
 nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nidaq.notes = 'A quick scan to test 2D again and record better formatted data';
+nidaq.notes = 'Very quick scan to see if I can recover same results';
 
 %% Setup scan
 
