@@ -26,8 +26,8 @@ nq = NIdaq('DL', path); %save path
 % Add and set parameters here! not in the code! if you want more params
 % add them here  All of these 'should' be saved ;)
 nq.p.gain        = 500;
-nq.p.lpf0        = 1000;
-nq.p.rate        = 900; %0.1 < rate < 2 857 142.9
+nq.p.lpf0        = 10000;
+nq.p.rate        = 9000; %0.1 < rate < 2 857 142.9
 nq.p.T           = 4.38;
 nq.p.Terr        = .013;
 
@@ -51,7 +51,7 @@ nq.p.hist.range = .20;    % deviation from the target point for
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nq.notes = 'finer resolution to see if things change';
+nq.notes = 'same resolution, faster to see if we recover something more similar to 2 times ago.';
 
 %% Setup scan
 
