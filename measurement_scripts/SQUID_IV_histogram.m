@@ -28,8 +28,8 @@ nq = NIdaq('DL', path); %save path
 nq.p.gain        = 500;
 nq.p.lpf0        = 10000;
 nq.p.rate        = 9000; %0.1 < rate < 2 857 142.9
-nq.p.T           = 4.38;
-nq.p.Terr        = .013;
+nq.p.T           = 6.0;
+nq.p.Terr        = .032;
 
 nq.p.mod.I       = 0e-6;
 nq.p.mod.biasr   = 2.5e3;  %1.0 + 1.5 cold
