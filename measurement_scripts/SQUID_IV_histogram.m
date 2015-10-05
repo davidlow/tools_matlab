@@ -46,7 +46,7 @@ nq.p.cal.high   = 20e-6;  % calibration, after squid jumps to normal
 nq.p.cal.pts    = 10;     % calibration, number of points in calibration
 
 nq.p.hist.pts   = 1000;   % number of points in the histogram
-nq.p.hist.range = .1;    % deviation from the target point for 
+nq.p.hist.range = .05;    % deviation from the target point for 
                              % registering successful swich from lo -> hi
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
