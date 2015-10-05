@@ -28,8 +28,8 @@ nidaq = NIdaq('DL', path); %save path
 nidaq.p.gain        = 500;
 nidaq.p.lpf0        = 1000;
 nidaq.p.rate        = 700; %0.1 < rate < 2 857 142.9
-nidaq.p.T           = 4.38;
-nidaq.p.Terr        = .013;
+nidaq.p.T           = 6.0;
+nidaq.p.Terr        = .033;
 
 nidaq.p.mod_I_cntr  = 0;      % center in amps
 nidaq.p.mod_I_span  = 200e-6; % total span in amps
