@@ -27,7 +27,7 @@ nq = NIdaq('DL', path); %save path
 % add them here  All of these 'should' be saved ;)
 nq.p.gain        = 500;
 nq.p.lpf0        = 1000;
-nq.p.rate        = 850; %0.1 < rate < 2 857 142.9
+nq.p.rate        = 900; %0.1 < rate < 2 857 142.9
 nq.p.T           = 4.38;
 nq.p.Terr        = .013;
 
@@ -36,7 +36,7 @@ nq.p.mod.biasr   = 2.5e3;  %1.0 + 1.5 cold
 
 nq.p.squid.I_cntr= 10e-6;  % center current in amps
 nq.p.squid.I_span= 30e-6; % total span in amps
-nq.p.squid.I_step= .01e-6;  % current step in amps
+nq.p.squid.I_step= .05e-6;  % current step in amps
 nq.p.squid.biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 
 nq.p.ramppts     = 10;
@@ -45,7 +45,7 @@ nq.p.cal.low    = 0e-6;   % calibration, when squid is superconducting
 nq.p.cal.high   = 20e-6;  % calibration, after squid jumps to normal
 nq.p.cal.pts    = 10;     % calibration, number of points in calibration
 
-nq.p.hist.pts   = 3000;   % number of points in the histogram
+nq.p.hist.pts   = 1500;   % number of points in the histogram
 nq.p.hist.range = .20;    % deviation from the target point for 
                              % registering successful swich from lo -> hi
 
@@ -125,6 +125,9 @@ nq.p.cal.high_data  = forw_d(end);
 % strip backwards data, add switch to low to lowswitch set
 nq.scantype = '';
 
+histrange = abs(nq.p.cal.low_data - nq.p.cal.high_data) * ...
+                nq.p.hist.range;
+
 for i = 1:nq.p.hist.pts
     nq.setoutputdata(0, squidVs);
     nq.setoutputdata(1, modVs);
@@ -137,19 +140,21 @@ for i = 1:nq.p.hist.pts
                                   nq.p.ramppts, length(squidVsraw));
     back_d = MathUtils.striprmp_2(data, ...
                                   nq.p.ramppts, length(squidVsraw));
-    histrange = abs(nq.p.cal.low_data - nq.p.cal.high_data) * ...
-                nq.p.hist.range;
+
     highsw(i) = squidVsraw(MathUtils.hist_detect(forw_d, ...
                                           nq.p.cal.high_data, ...
                                           histrange));
     lowsw(i)  = squidVsraw(MathUtils.hist_detect(back_d, ...
                                           nq.p.cal.low_data, ...
                                           histrange));
-    highsw(i) = highsw(i) / nq.p.squid.biasr;
-    lowsw(i)  = lowsw(i)  / nq.p.squid.biasr;
     histogram(highsw(1:i));
     title([num2str(i), ' / ' num2str(length(highsw))]);
+    xlabel('I_{squid}');
 end
+
+highsw = highsw / nq.p.squid.biasr;
+lowsw  = lowsw  / nq.p.squid.biasr;
+
 
 CSUtils.savecsv([nq.savedir, nq.timestring(), '_highsw.csv'],...
                 highsw, '# trigger current for \n' ...
