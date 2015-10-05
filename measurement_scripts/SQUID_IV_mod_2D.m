@@ -42,7 +42,7 @@ nidaq.p.squid_I_step= .1e-6;  % current step in amps
 nidaq.p.squid_biasr = 2.5e3 + 3e3; %1.0k + 1.5k cold, 3k warm
 nidaq.p.ramppts     = 10;
 
-nidaq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
+nidaq.p.range       = 1; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
 nidaq.notes = 'Very quick scan to see if I can recover same results';
 
