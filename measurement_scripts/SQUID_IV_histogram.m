@@ -51,7 +51,7 @@ nq.p.hist.range = .05;    % deviation from the target point for
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nq.notes = 'Cancelled prev scan, reduced hist.range to 10%.';
+nq.notes = 'reduced hist.range to 5%.';
 
 %% Setup scan
 
