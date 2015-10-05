@@ -51,7 +51,7 @@ nq.p.hist.range = .20;    % deviation from the target point for
 
 nq.p.range       = 10; % options: 0.1, 0.2, 0.5, 1, 5, 10
 
-nq.notes = 'previous scan suggested needs smaller stepsize, not more points';
+nq.notes = 'previous scan wasnt working.  trying faster and more points again after looking up resolution of daq';
 
 %% Setup scan
 
@@ -147,7 +147,7 @@ for i = 1:nq.p.hist.pts
     lowsw(i)  = squidVsraw(MathUtils.hist_detect(back_d, ...
                                           nq.p.cal.low_data, ...
                                           histrange));
-    histogram(highsw(1:i));
+    histogram(highsw(1:i),50);
     title([num2str(i), ' / ' num2str(length(highsw))]);
     xlabel('I_{squid}');
 end
